@@ -12,6 +12,10 @@
         android:id="@+id/random_list"
         android:icon="@drawable/random_icon"
         android:title="RandomList" />
+    <item
+        android:id="@+id/random_list_2"
+        android:icon="@drawable/random_icon"
+        android:title="RandomList" />
 
 
 </menu>
