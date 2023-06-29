@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/zoo_list">
+    <fragment
+        android:id="@+id/zoo_list"
+        android:name="com.vlados.myownbottomnavigation.ZooListFragment"
+        tools:layout="@layout/zoo_list" >
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/workers_list"
+        android:name="com.vlados.myownbottomnavigation.WorkersListFragment"
+        tools:layout="@layout/workers_list" >
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/random_list"
+        android:name="com.vlados.myownbottomnavigation.RandomListFragment"
+        tools:layout="@layout/random_list" >
+
+    </fragment>
+
+</navigation>
