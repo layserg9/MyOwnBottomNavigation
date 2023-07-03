@@ -20,7 +20,7 @@
 
     <fragment
         android:id="@+id/random_list"
-        android:name="com.vlados.myownbottomnavigation.RandomListFragment"
+        android:name="com.vlados.myownbottomnavigation.ZooListFragment"
         tools:layout="@layout/random_list" >
 
     </fragment>

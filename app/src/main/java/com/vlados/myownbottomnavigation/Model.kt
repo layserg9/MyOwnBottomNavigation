@@ -131,8 +131,8 @@ class AnimalFactory constructor(){
 class RandomFactory constructor(){
     private val animalFactory = AnimalFactory()
     private val workersFactory = WorkerFactory()
-    fun createMultipleItems (count: Int): List<RandomItem>{
-        val randomList = mutableListOf<RandomItem>()
+    fun createMultipleItems (count: Int): List<ZooItem>{
+        val randomList = mutableListOf<ZooItem>()
         val animalsList = animalFactory.createMultipleAnimals(count)
         val workersList = workersFactory.createMultipleWorkers(count)
         randomList.addAll(animalsList)

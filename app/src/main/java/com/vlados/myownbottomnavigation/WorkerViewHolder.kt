@@ -10,7 +10,7 @@ class WorkerViewHolder(item: View): RecyclerView.ViewHolder(item) {
     val classTextView: TextView = item.findViewById(R.id.class_text_view_worker)
     val eyeColorTextView: TextView = item.findViewById(R.id.eye_color_text_view_worker)
 
-    fun create(worker: WorkerItem, callback: ILongClickListener) {
+    fun bind(worker: WorkerItem, callback: ILongClickListener) {
         imageView.setImageResource(worker.imageId)
         classTextView.text = worker.className
         eyeColorTextView.text = worker.eyeColor
