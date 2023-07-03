@@ -128,7 +128,7 @@ class AnimalFactory constructor(){
 }
 
 /////////////////ФАБРИКА РАНДОМОВ///////////////////////////////
-class RandomFactory constructor(){
+class ZooFactory constructor(){
     private val animalFactory = AnimalFactory()
     private val workersFactory = WorkerFactory()
     fun createMultipleItems (count: Int): List<ZooItem>{

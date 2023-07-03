@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 class ZooListFragment : Fragment(R.layout.random_list) {
     private var zooAdapter: ZooAdapter? = null
     private fun getListItems(count: Int): List<ZooItem> {
-        return RandomFactory().createMultipleItems(count)
+        return ZooFactory().createMultipleItems(count)
     }
 
     private fun getRandomListItem(): ZooItem {
