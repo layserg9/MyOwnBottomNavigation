@@ -68,6 +68,7 @@ class RandomAdapter() : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         notifyDataSetChanged()
     }
 }
+
 interface Listener {
     fun onClick(random: RandomItem): Boolean
 }

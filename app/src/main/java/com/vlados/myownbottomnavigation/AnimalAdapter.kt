@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 
 class AnimalAdapter() : RecyclerView.Adapter<AnimalAdapter.AnimalHolder>(){
     val animalList = ArrayList<AnimalItem>()
-    val callback = object : Listener{
+    val callback = object: Listener{
         override fun onClick(random: RandomItem): Boolean {
             animalList.remove(random)
             notifyDataSetChanged()
@@ -41,7 +41,7 @@ class AnimalAdapter() : RecyclerView.Adapter<AnimalAdapter.AnimalHolder>(){
         return animalList.size
     }
 
-    fun addAnimal(animal:AnimalItem){
+    fun addAnimal(animal: AnimalItem){
         animalList.add(animal)
         notifyDataSetChanged()
     }

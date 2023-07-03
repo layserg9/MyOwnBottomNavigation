@@ -7,7 +7,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 
-class WorkerAdapter() : RecyclerView.Adapter<WorkerAdapter.WorkerHolder>() {
+class WorkerAdapter(): RecyclerView.Adapter<WorkerAdapter.WorkerHolder>() {
     val workerList = ArrayList<WorkerItem>()
     val callback = object : Listener {
         override fun onClick(random: RandomItem): Boolean {
@@ -17,7 +17,7 @@ class WorkerAdapter() : RecyclerView.Adapter<WorkerAdapter.WorkerHolder>() {
         }
     }
 
-    class WorkerHolder(item: View) : RecyclerView.ViewHolder(item) {
+    class WorkerHolder(item: View): RecyclerView.ViewHolder(item) {
         val imageView: ImageView = item.findViewById(R.id.image_view_worker)
         val classTextView: TextView = item.findViewById(R.id.class_text_view_worker)
         val eyeColorTextView: TextView = item.findViewById(R.id.eye_color_text_view_worker)

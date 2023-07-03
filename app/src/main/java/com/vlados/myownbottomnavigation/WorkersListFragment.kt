@@ -8,7 +8,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
 class WorkersListFragment: Fragment(R.layout.workers_list) {
-
     private var workerAdapter: WorkerAdapter? = null
 
     private fun getListItems(count: Int): List<WorkerItem> {
@@ -18,6 +17,7 @@ class WorkersListFragment: Fragment(R.layout.workers_list) {
     private fun getRandomListItem(): WorkerItem {
         return getListItems(20).random()
     }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 

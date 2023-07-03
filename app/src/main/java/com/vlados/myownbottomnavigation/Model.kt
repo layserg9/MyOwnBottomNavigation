@@ -24,7 +24,6 @@ open class Bird(
     }
 }
 
-
 open class Worker(
     eyeColor: String,
     heirColor: String,
@@ -39,7 +38,6 @@ open class Worker(
     }
 }
 
-
 open class Man(
     val eyeColor: String,
     val heirColor: String,
@@ -51,11 +49,6 @@ open class Man(
         println("${this.javaClass.simpleName} умеет бегать")
     }
 }
-
-
-
-
-
 
 //---------------------- Фабрика работников
 class WorkerFactory constructor(){
@@ -120,6 +113,7 @@ class AnimalFactory constructor(){
         }
         return resultList
     }
+
     private fun getAnimalImage(name: String): Int {
         if (name == "Elephant") {
             return R.drawable.elephant
@@ -133,8 +127,6 @@ class AnimalFactory constructor(){
     }
 }
 
-////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////
 /////////////////ФАБРИКА РАНДОМОВ///////////////////////////////
 class RandomFactory constructor(){
     private val animalFactory = AnimalFactory()
@@ -148,18 +140,9 @@ class RandomFactory constructor(){
         randomList.shuffle()
         return randomList.take(count)
     }
-
 }
 
-
-
-////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////
-
-
-
 //_____________________ ЖИВОТНЫЕ
-
 class Elephant constructor(
     numberOfPaws: Int,
     hasHooves: Boolean
@@ -180,7 +163,6 @@ class Wolf constructor(
 class Eagle constructor(beakColor: String, canFly: Boolean)
     : Bird(beakColor, canFly){
 }
-
 
 //__________ Работники
 class Security constructor(
@@ -216,7 +198,6 @@ class Trainer constructor(
         println("${this.javaClass.simpleName} дрессирует львов, у него $numberOfFingers пальцев")
     }
 }
-
 
 interface IWorkable {
     fun work()
