@@ -1,26 +1,23 @@
 package com.vlados.myownbottomnavigation
 
-import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 
-class RandomAdapter() : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
-    val randomList = ArrayList<RandomItem>()
-    val callback = object : Listener{
-        override fun onClick(random: RandomItem): Boolean {
-            randomList.remove(random)
+class ZooAdapter() : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+    val zooList = ArrayList<RandomItem>()
+    val callback = object : ILongClickListener{
+        override fun onItemLongClick(random: RandomItem): Boolean {
+            zooList.remove(random)
             notifyDataSetChanged()
             return true
         }
     }
 
     override fun getItemViewType(position: Int): Int {
-        return when (val item = randomList[position]) {
+        return when (val item = zooList[position]) {
             is AnimalItem -> ANIMAL_VIEW_TYPE
             is WorkerItem -> WORKER_VIEW_TYPE
             else -> ANOTHER_VIEW_TYPE
@@ -33,44 +30,44 @@ class RandomAdapter() : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         val workerView =
             LayoutInflater.from(parent.context).inflate(R.layout.worker_item, parent, false)
         return if (viewType == ANIMAL_VIEW_TYPE) {
-            AnimalAdapter.AnimalHolder(animalView)
+            AnimalViewHolder(animalView)
         } else if (viewType == WORKER_VIEW_TYPE) {
-            WorkerAdapter.WorkerHolder(workerView)
-        } else AnimalAdapter.AnimalHolder(View(parent.context))
+            WorkerViewHolder(workerView)
+        } else AnimalViewHolder(View(parent.context))
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val viewType = getItemViewType(position)
         if (viewType == ANIMAL_VIEW_TYPE) {
-            val correctViewHolder: AnimalAdapter.AnimalHolder? =
-                holder as? AnimalAdapter.AnimalHolder
-            val elementOfList = randomList[position] as AnimalItem
+            val correctViewHolder: AnimalViewHolder? =
+                holder as? AnimalViewHolder
+            val elementOfList = zooList[position] as AnimalItem
             correctViewHolder?.create(elementOfList, callback)
         } else if (viewType == WORKER_VIEW_TYPE) {
-            val correctViewHolder: WorkerAdapter.WorkerHolder? =
-                holder as? WorkerAdapter.WorkerHolder
-            val elementOfList = randomList[position] as WorkerItem
+            val correctViewHolder: WorkerViewHolder? =
+                holder as? WorkerViewHolder
+            val elementOfList = zooList[position] as WorkerItem
             correctViewHolder?.create(elementOfList, callback)
         }
     }
 
     override fun getItemCount(): Int {
-        return randomList.size
+        return zooList.size
     }
 
-    fun addRandom(random: RandomItem) {
-        randomList.add(random)
+    fun addZooListItem(random: RandomItem) {
+        zooList.add(random)
         notifyDataSetChanged()
     }
 
-    fun addRandoms(listRandoms: List<RandomItem>) {
-        randomList.addAll(listRandoms)
+    fun addZooListItems(listRandoms: List<RandomItem>) {
+        zooList.addAll(listRandoms)
         notifyDataSetChanged()
     }
 }
 
-interface Listener {
-    fun onClick(random: RandomItem): Boolean
+interface ILongClickListener {
+    fun onItemLongClick(random: RandomItem): Boolean
 }
 
 const val ANIMAL_VIEW_TYPE = 1

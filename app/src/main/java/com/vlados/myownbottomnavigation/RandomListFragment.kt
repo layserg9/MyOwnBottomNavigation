@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
 class RandomListFragment : Fragment(R.layout.random_list) {
-    private var randomAdapter: RandomAdapter? = null
+    private var zooAdapter: ZooAdapter? = null
     private fun getListItems(count: Int): List<RandomItem> {
         return RandomFactory().createMultipleItems(count)
     }
@@ -23,14 +23,14 @@ class RandomListFragment : Fragment(R.layout.random_list) {
         val recyclerView: RecyclerView = view.findViewById(R.id.recycler_view_random)
 
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
-        randomAdapter = RandomAdapter()
-        randomAdapter?.addRandoms(getListItems(4))
-        recyclerView.adapter = randomAdapter
+        zooAdapter = ZooAdapter()
+        zooAdapter?.addZooListItems(getListItems(4))
+        recyclerView.adapter = zooAdapter
 
         buttonAdd.setOnClickListener {
-            randomAdapter?.addRandom(getRandomListItem())
-            val scrollPosition = randomAdapter?.itemCount?.minus(1) ?: 0
-            if (randomAdapter != null) {
+            zooAdapter?.addZooListItem(getRandomListItem())
+            val scrollPosition = zooAdapter?.itemCount?.minus(1) ?: 0
+            if (zooAdapter != null) {
                 recyclerView.scrollToPosition(scrollPosition)
             }
         }

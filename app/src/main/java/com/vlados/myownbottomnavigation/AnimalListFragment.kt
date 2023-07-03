@@ -9,12 +9,12 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
-class ZooListFragment: Fragment(){
+class AnimalListFragment: Fragment(){
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?) : View? {
             return inflater.inflate(R.layout.zoo_list, container, false)
     }
 
-    private var animalAdapter: AnimalAdapter? = null
+    private var zooAdapter: ZooAdapter? = null
 
     private fun getListItems(count: Int): List<AnimalItem> {
         return AnimalFactory().createMultipleAnimals(count)
@@ -31,14 +31,14 @@ class ZooListFragment: Fragment(){
         val recyclerView: RecyclerView = view.findViewById(R.id.recycler_view_zoo)
 
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
-        animalAdapter = AnimalAdapter()
-        animalAdapter?.addAnimals(getListItems(5))
-        recyclerView.adapter = animalAdapter
+        zooAdapter = ZooAdapter()
+        zooAdapter?.addZooListItems(getListItems(5))
+        recyclerView.adapter = zooAdapter
 
         buttonAdd.setOnClickListener {
-            animalAdapter?.addAnimal(getRandomListItem())
-            val scrollPosition = animalAdapter?.itemCount?.minus(1) ?: 0
-            if (animalAdapter != null) {
+            zooAdapter?.addZooListItem(getRandomListItem())
+            val scrollPosition = zooAdapter?.itemCount?.minus(1) ?: 0
+            if (zooAdapter != null) {
                 recyclerView.scrollToPosition(scrollPosition)
             }
         }
