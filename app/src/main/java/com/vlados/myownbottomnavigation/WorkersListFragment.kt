@@ -8,8 +8,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
 class WorkersListFragment: Fragment(R.layout.workers_list) {
-
-    private var workerAdapter: WorkerAdapter? = null
+    private var zooAdapter: ZooAdapter? = null
 
     private fun getListItems(count: Int): List<WorkerItem> {
         return WorkerFactory().createMultipleWorkers(count)
@@ -18,6 +17,7 @@ class WorkersListFragment: Fragment(R.layout.workers_list) {
     private fun getRandomListItem(): WorkerItem {
         return getListItems(20).random()
     }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -25,14 +25,14 @@ class WorkersListFragment: Fragment(R.layout.workers_list) {
         val recyclerView: RecyclerView = view.findViewById(R.id.recycler_view_worker)
 
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
-        workerAdapter = WorkerAdapter()
-        workerAdapter?.addWorkers(getListItems(4))
-        recyclerView.adapter = workerAdapter
+        zooAdapter = ZooAdapter()
+        zooAdapter?.addZooListItems(getListItems(4))
+        recyclerView.adapter = zooAdapter
 
         buttonAdd.setOnClickListener {
-            workerAdapter?.addWorker(getRandomListItem())
-            val scrollPosition = workerAdapter?.itemCount?.minus(1) ?: 0
-            if (workerAdapter != null) {
+            zooAdapter?.addZooListItem(getRandomListItem())
+            val scrollPosition = zooAdapter?.itemCount?.minus(1) ?: 0
+            if (zooAdapter != null) {
                 recyclerView.scrollToPosition(scrollPosition)
             }
         }
