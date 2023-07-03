@@ -9,8 +9,15 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 
-class RandomAdapter(): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class RandomAdapter() : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     val randomList = ArrayList<RandomItem>()
+    val callback = object : Listener{
+        override fun onClick(random: RandomItem): Boolean {
+            randomList.remove(random)
+            notifyDataSetChanged()
+            return true
+        }
+    }
 
     override fun getItemViewType(position: Int): Int {
         return when (val item = randomList[position]) {
@@ -21,44 +28,49 @@ class RandomAdapter(): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val animalView = LayoutInflater.from(parent.context).inflate(R.layout.animal_item, parent, false)
-        val workerView = LayoutInflater.from(parent.context).inflate(R.layout.worker_item, parent, false)
+        val animalView =
+            LayoutInflater.from(parent.context).inflate(R.layout.animal_item, parent, false)
+        val workerView =
+            LayoutInflater.from(parent.context).inflate(R.layout.worker_item, parent, false)
         return if (viewType == ANIMAL_VIEW_TYPE) {
             AnimalAdapter.AnimalHolder(animalView)
-        } else if (viewType == WORKER_VIEW_TYPE){
+        } else if (viewType == WORKER_VIEW_TYPE) {
             WorkerAdapter.WorkerHolder(workerView)
         } else AnimalAdapter.AnimalHolder(View(parent.context))
     }
 
-
-
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val viewType = getItemViewType(position)
-        if ( viewType == ANIMAL_VIEW_TYPE) {
-            val correctViewHolder: AnimalAdapter.AnimalHolder? = holder as? AnimalAdapter.AnimalHolder
+        if (viewType == ANIMAL_VIEW_TYPE) {
+            val correctViewHolder: AnimalAdapter.AnimalHolder? =
+                holder as? AnimalAdapter.AnimalHolder
             val elementOfList = randomList[position] as AnimalItem
-            correctViewHolder?.create(elementOfList)
-        } else if (viewType == WORKER_VIEW_TYPE){
-            val correctViewHolder: WorkerAdapter.WorkerHolder? = holder as? WorkerAdapter.WorkerHolder
+            correctViewHolder?.create(elementOfList, callback)
+        } else if (viewType == WORKER_VIEW_TYPE) {
+            val correctViewHolder: WorkerAdapter.WorkerHolder? =
+                holder as? WorkerAdapter.WorkerHolder
             val elementOfList = randomList[position] as WorkerItem
-            correctViewHolder?.create(elementOfList)
-           }
+            correctViewHolder?.create(elementOfList, callback)
+        }
     }
 
     override fun getItemCount(): Int {
         return randomList.size
     }
 
-    fun addRandom(random:RandomItem){
+    fun addRandom(random: RandomItem) {
         randomList.add(random)
         notifyDataSetChanged()
     }
-    fun addRandoms(listRandoms: List<RandomItem>){
+
+    fun addRandoms(listRandoms: List<RandomItem>) {
         randomList.addAll(listRandoms)
         notifyDataSetChanged()
     }
 }
-
+interface Listener {
+    fun onClick(random: RandomItem): Boolean
+}
 
 const val ANIMAL_VIEW_TYPE = 1
 const val WORKER_VIEW_TYPE = 2

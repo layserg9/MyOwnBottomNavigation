@@ -7,17 +7,26 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 
-class WorkerAdapter(): RecyclerView.Adapter<WorkerAdapter.WorkerHolder>() {
+class WorkerAdapter() : RecyclerView.Adapter<WorkerAdapter.WorkerHolder>() {
     val workerList = ArrayList<WorkerItem>()
+    val callback = object : Listener {
+        override fun onClick(random: RandomItem): Boolean {
+            workerList.remove(random)
+            notifyDataSetChanged()
+            return true
+        }
+    }
 
-    class WorkerHolder(item: View): RecyclerView.ViewHolder(item){
+    class WorkerHolder(item: View) : RecyclerView.ViewHolder(item) {
         val imageView: ImageView = item.findViewById(R.id.image_view_worker)
         val classTextView: TextView = item.findViewById(R.id.class_text_view_worker)
         val eyeColorTextView: TextView = item.findViewById(R.id.eye_color_text_view_worker)
-        fun create(worker: WorkerItem){
+
+        fun create(worker: WorkerItem, callback: Listener) {
             imageView.setImageResource(worker.imageId)
             classTextView.text = worker.className
             eyeColorTextView.text = worker.eyeColor
+            itemView.setOnClickListener{callback.onClick(worker)}
         }
     }
 
@@ -27,19 +36,22 @@ class WorkerAdapter(): RecyclerView.Adapter<WorkerAdapter.WorkerHolder>() {
     }
 
     override fun onBindViewHolder(holder: WorkerHolder, position: Int) {
-        holder.create(workerList[position])
+        holder.create(workerList[position], callback)
     }
 
     override fun getItemCount(): Int {
         return workerList.size
     }
 
-    fun addWorker(worker:WorkerItem){
+    fun addWorker(worker: WorkerItem) {
         workerList.add(worker)
         notifyDataSetChanged()
     }
-    fun addWorkers(listWorkers: List<WorkerItem>){
+
+    fun addWorkers(listWorkers: List<WorkerItem>) {
         workerList.addAll(listWorkers)
         notifyDataSetChanged()
     }
 }
+
+

@@ -9,14 +9,22 @@ import androidx.recyclerview.widget.RecyclerView
 
 class AnimalAdapter() : RecyclerView.Adapter<AnimalAdapter.AnimalHolder>(){
     val animalList = ArrayList<AnimalItem>()
+    val callback = object : Listener{
+        override fun onClick(random: RandomItem): Boolean {
+            animalList.remove(random)
+            notifyDataSetChanged()
+            return true
+        }
+    }
     class AnimalHolder(item: View): RecyclerView.ViewHolder(item) {
         val imageView: ImageView = item.findViewById(R.id.image_view_animal)
         val classNameTextView: TextView = item.findViewById(R.id.class_text_view_animal)
         val pawsNameTextView: TextView = item.findViewById(R.id.paws_text_view_animal)
-        fun create(animal: AnimalItem){
+        fun create(animal: AnimalItem, callback: Listener){
             imageView.setImageResource(animal.imageId)
             classNameTextView.text = animal.className
             pawsNameTextView.text = animal.numberOfPaws
+            itemView.setOnLongClickListener{callback.onClick(animal)}
         }
     }
 
@@ -26,7 +34,7 @@ class AnimalAdapter() : RecyclerView.Adapter<AnimalAdapter.AnimalHolder>(){
     }
 
     override fun onBindViewHolder(holder: AnimalHolder, position: Int) {
-        holder.create(animalList[position])
+        holder.create(animalList[position], callback)
     }
 
     override fun getItemCount(): Int {
@@ -37,6 +45,7 @@ class AnimalAdapter() : RecyclerView.Adapter<AnimalAdapter.AnimalHolder>(){
         animalList.add(animal)
         notifyDataSetChanged()
     }
+
     fun addAnimals(listAnimal: List<AnimalItem>){
         animalList.addAll(listAnimal)
         notifyDataSetChanged()
