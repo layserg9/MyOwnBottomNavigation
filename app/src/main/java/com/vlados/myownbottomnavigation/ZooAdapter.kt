@@ -6,15 +6,8 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 
-class ZooAdapter() : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
-    val zooList = ArrayList<ZooItem>()
-    val callback = object : ILongClickListener{
-        override fun onItemLongClick(random: ZooItem): Boolean {
-            zooList.remove(random)
-            notifyDataSetChanged()
-            return true
-        }
-    }
+class ZooAdapter(private val deleteItem: (ZooItem) -> Boolean): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+   private var zooList = listOf<ZooItem>()
 
     override fun getItemViewType(position: Int): Int {
         return when (val item = zooList[position]) {
@@ -30,10 +23,10 @@ class ZooAdapter() : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         val workerView =
             LayoutInflater.from(parent.context).inflate(R.layout.worker_item, parent, false)
         return if (viewType == ANIMAL_VIEW_TYPE) {
-            AnimalViewHolder(animalView)
+            AnimalViewHolder(animalView, deleteItem)
         } else if (viewType == WORKER_VIEW_TYPE) {
-            WorkerViewHolder(workerView)
-        } else AnimalViewHolder(View(parent.context))
+            WorkerViewHolder(workerView, deleteItem)
+        } else AnimalViewHolder(View(parent.context), deleteItem)
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
@@ -42,12 +35,12 @@ class ZooAdapter() : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
             val correctViewHolder: AnimalViewHolder? =
                 holder as? AnimalViewHolder
             val elementOfList = zooList[position] as AnimalItem
-            correctViewHolder?.bind(elementOfList, callback)
+            correctViewHolder?.bind(elementOfList)
         } else if (viewType == WORKER_VIEW_TYPE) {
             val correctViewHolder: WorkerViewHolder? =
                 holder as? WorkerViewHolder
             val elementOfList = zooList[position] as WorkerItem
-            correctViewHolder?.bind(elementOfList, callback)
+            correctViewHolder?.bind(elementOfList)
         }
     }
 
@@ -55,19 +48,10 @@ class ZooAdapter() : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         return zooList.size
     }
 
-    fun addZooListItem(random: ZooItem) {
-        zooList.add(random)
+    fun updateList(list: List<ZooItem>) {
+        zooList = list
         notifyDataSetChanged()
     }
-
-    fun addZooListItems(listRandoms: List<ZooItem>) {
-        zooList.addAll(listRandoms)
-        notifyDataSetChanged()
-    }
-}
-
-interface ILongClickListener {
-    fun onItemLongClick(random: ZooItem): Boolean
 }
 
 const val ANIMAL_VIEW_TYPE = 1
