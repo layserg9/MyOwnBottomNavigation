@@ -10,22 +10,19 @@ class Repository private constructor() {
             }
             return repository!!
         }
-
-        const val ANIMALS_CONTENT = 1
-        const val WORKERS_CONTENT = 2
     }
 
     private var zooList = mutableListOf<ZooItem>()
 
     init {
-        addItem(generateItem(ANIMALS_CONTENT))
-        addItem(generateItem(WORKERS_CONTENT))
+        addItem(generateItem(ZooListContentType.ANIMALS_CONTENT))
+        addItem(generateItem(ZooListContentType.WORKERS_CONTENT))
     }
 
     fun getItems(contentId: Int): List<ZooItem> {
         return when (contentId) {
-            ANIMALS_CONTENT -> zooList.filter { item -> item is AnimalItem }
-            WORKERS_CONTENT -> zooList.filter { item -> item is WorkerItem }
+            ZooListContentType.ANIMALS_CONTENT -> zooList.filter { item -> item is AnimalItem }
+            ZooListContentType.WORKERS_CONTENT -> zooList.filter { item -> item is WorkerItem }
             else -> zooList
         }
     }
@@ -36,8 +33,8 @@ class Repository private constructor() {
 
     fun getListItems(count: Int, contentType: Int): List<ZooItem> {
         return when (contentType) {
-            ANIMALS_CONTENT -> AnimalFactory().createMultipleAnimals(count)
-            WORKERS_CONTENT -> WorkerFactory().createMultipleWorkers(count)
+            ZooListContentType.ANIMALS_CONTENT -> AnimalFactory().createMultipleAnimals(count)
+            ZooListContentType.WORKERS_CONTENT -> WorkerFactory().createMultipleWorkers(count)
             else -> ZooFactory().createMultipleItems(count)
         }
     }

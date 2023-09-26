@@ -14,11 +14,10 @@ class ZooFragment : Fragment() {
     private var zooAdapter = ZooAdapter(::deleteItem)
     private var bindingClass: RandomListBinding? = null
     private val viewModel: MainViewModel by viewModels()
-    private var contentType: Int = ANIMALS_CONTENT
+    private var contentType: Int = ZooListContentType.ANIMALS_CONTENT
 
     companion object {
         private const val CONTENT_TYPE_KEY = "ContentTypeKey"
-        const val ANIMALS_CONTENT = 1
     }
 
     override fun onCreateView(
@@ -37,7 +36,7 @@ class ZooFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        contentType = arguments?.getInt(CONTENT_TYPE_KEY) ?: ANIMALS_CONTENT
+        contentType = arguments?.getInt(CONTENT_TYPE_KEY) ?: ZooListContentType.ANIMALS_CONTENT
         bindingClass?.recyclerViewRandom?.layoutManager = LinearLayoutManager(requireContext())
         bindingClass?.recyclerViewRandom?.adapter = zooAdapter
         bindingClass?.buttonRandom?.text = viewModel.getButtonName(contentType)

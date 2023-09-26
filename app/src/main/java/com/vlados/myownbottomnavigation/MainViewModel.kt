@@ -3,24 +3,19 @@ package com.vlados.myownbottomnavigation
 import androidx.lifecycle.ViewModel
 
 
-class MainViewModel: ViewModel() {
-    companion object{
-        const val ANIMALS_CONTENT = 1
-        const val WORKERS_CONTENT = 2
-        const val ALL_CONTENT = 3
-    }
+class MainViewModel : ViewModel() {
 
     private val repository = Repository.getInstance()
 
     fun getButtonName(contentType: Int): String {
         return when (contentType) {
-            ANIMALS_CONTENT -> {
-                 "Добавить животное"
+            ZooListContentType.ANIMALS_CONTENT -> {
+                "Добавить животное"
             }
-            WORKERS_CONTENT -> {
+            ZooListContentType.WORKERS_CONTENT -> {
                 "Добавить работника"
             }
-            ALL_CONTENT -> {
+            ZooListContentType.ALL_CONTENT -> {
                 "Добавить существо"
             }
             else -> {
@@ -29,7 +24,7 @@ class MainViewModel: ViewModel() {
         }
     }
 
-    fun getItems(contentType: Int): List<ZooItem>{
+    fun getItems(contentType: Int): List<ZooItem> {
         return repository.getItems(contentType)
     }
 

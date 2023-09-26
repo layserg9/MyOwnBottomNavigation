@@ -8,15 +8,12 @@ import com.vlados.myownbottomnavigation.databinding.AnimalItemBinding
 import com.vlados.myownbottomnavigation.databinding.WorkerItemBinding
 
 class WorkerViewHolder(item: View, private val deleteItem: (ZooItem) -> Boolean): RecyclerView.ViewHolder(item) {
-    private var viewBinding = WorkerItemBinding.bind(item)
-    val imageView: ImageView = viewBinding.imageViewWorker
-    val classTextView: TextView = viewBinding.classTextViewWorker
-    val eyeColorTextView: TextView = viewBinding.eyeColorTextViewWorker
+    private val viewBinding = WorkerItemBinding.bind(item)
 
     fun bind(worker: WorkerItem) {
-        imageView.setImageResource(worker.imageId)
-        classTextView.text = worker.className
-        eyeColorTextView.text = worker.eyeColor
+        viewBinding.imageViewWorker.setImageResource(worker.imageId)
+        viewBinding.classTextViewWorker.text = worker.className
+        viewBinding.eyeColorTextViewWorker.text = worker.eyeColor
         itemView.setOnLongClickListener{deleteItem(worker)}
     }
 }
