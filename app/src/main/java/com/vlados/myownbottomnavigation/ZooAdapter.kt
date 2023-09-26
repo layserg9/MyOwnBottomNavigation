@@ -9,6 +9,12 @@ import androidx.recyclerview.widget.RecyclerView.ViewHolder
 class ZooAdapter(private val deleteItem: (ZooItem) -> Boolean): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
    private var zooList = listOf<ZooItem>()
 
+    companion object{
+       private const val ANIMAL_VIEW_TYPE = 1
+       private const val WORKER_VIEW_TYPE = 2
+       private const val ANOTHER_VIEW_TYPE = 3
+    }
+
     override fun getItemViewType(position: Int): Int {
         return when (val item = zooList[position]) {
             is AnimalItem -> ANIMAL_VIEW_TYPE
@@ -53,7 +59,3 @@ class ZooAdapter(private val deleteItem: (ZooItem) -> Boolean): RecyclerView.Ada
         notifyDataSetChanged()
     }
 }
-
-const val ANIMAL_VIEW_TYPE = 1
-const val WORKER_VIEW_TYPE = 2
-const val ANOTHER_VIEW_TYPE = 3

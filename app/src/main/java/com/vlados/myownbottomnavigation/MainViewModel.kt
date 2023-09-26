@@ -4,20 +4,25 @@ import androidx.lifecycle.ViewModel
 
 
 class MainViewModel: ViewModel() {
+    companion object{
+        const val ANIMALS_CONTENT = 1
+        const val WORKERS_CONTENT = 2
+        const val ALL_CONTENT = 3
+    }
+
     private val repository = Repository.getInstance()
 
     fun getButtonName(contentType: Int): String {
         return when (contentType) {
-            1 -> {
+            ANIMALS_CONTENT -> {
                  "Добавить животное"
             }
-            2 -> {
+            WORKERS_CONTENT -> {
                 "Добавить работника"
             }
-            3 -> {
+            ALL_CONTENT -> {
                 "Добавить существо"
             }
-
             else -> {
                 "Ошибка в contentType"
             }

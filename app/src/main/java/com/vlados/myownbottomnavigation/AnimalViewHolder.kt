@@ -4,12 +4,13 @@ import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.vlados.myownbottomnavigation.databinding.AnimalItemBinding
 
 class AnimalViewHolder(item: View, private val deleteItem: (ZooItem) -> Boolean): RecyclerView.ViewHolder(item) {
-    val imageView: ImageView = item.findViewById(R.id.image_view_animal)
-    val classNameTextView: TextView = item.findViewById(R.id.class_text_view_animal)
-    val pawsNameTextView: TextView = item.findViewById(R.id.paws_text_view_animal)
-    val contentType = 1
+    private var viewBinding = AnimalItemBinding.bind(item)
+    val imageView: ImageView = viewBinding.imageViewAnimal
+    val classNameTextView: TextView = viewBinding.classTextViewAnimal
+    val pawsNameTextView: TextView = viewBinding.pawsTextViewAnimal
 
     fun bind(animal: AnimalItem){
         imageView.setImageResource(animal.imageId)
