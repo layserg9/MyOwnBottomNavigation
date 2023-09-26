@@ -6,7 +6,7 @@
     app:startDestination="@+id/zoo_list">
     <fragment
         android:id="@+id/zoo_list"
-        android:name="com.vlados.myownbottomnavigation.VladikTestFragment"
+        android:name="com.vlados.myownbottomnavigation.ZooFragment"
         tools:layout="@layout/zoo_list">
         <argument
             android:name="ContentTypeKey"
@@ -17,7 +17,7 @@
 
     <fragment
         android:id="@+id/workers_list"
-        android:name="com.vlados.myownbottomnavigation.VladikTestFragment"
+        android:name="com.vlados.myownbottomnavigation.ZooFragment"
         tools:layout="@layout/workers_list"
         >
         <argument
@@ -29,7 +29,7 @@
 
     <fragment
         android:id="@+id/random_list"
-        android:name="com.vlados.myownbottomnavigation.VladikTestFragment"
+        android:name="com.vlados.myownbottomnavigation.ZooFragment"
         tools:layout="@layout/random_list" >
         <argument
             android:name="ContentTypeKey"

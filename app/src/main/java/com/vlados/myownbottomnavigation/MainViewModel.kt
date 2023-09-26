@@ -3,28 +3,28 @@ package com.vlados.myownbottomnavigation
 import androidx.lifecycle.ViewModel
 
 
-class MainViewModel: ViewModel() {
+class MainViewModel : ViewModel() {
+
     private val repository = Repository.getInstance()
 
     fun getButtonName(contentType: Int): String {
         return when (contentType) {
-            1 -> {
-                 "Добавить животное"
+            ZooListContentType.ANIMALS_CONTENT -> {
+                "Добавить животное"
             }
-            2 -> {
+            ZooListContentType.WORKERS_CONTENT -> {
                 "Добавить работника"
             }
-            3 -> {
+            ZooListContentType.ALL_CONTENT -> {
                 "Добавить существо"
             }
-
             else -> {
                 "Ошибка в contentType"
             }
         }
     }
 
-    fun getItems(contentType: Int): List<ZooItem>{
+    fun getItems(contentType: Int): List<ZooItem> {
         return repository.getItems(contentType)
     }
 

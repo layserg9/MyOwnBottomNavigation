@@ -23,7 +23,7 @@ import com.vlados.myownbottomnavigation.databinding.ActivityMainBinding
 import com.vlados.myownbottomnavigation.databinding.RandomListBinding
 
 class MainActivity : AppCompatActivity() {
-    lateinit var bindingClass: ActivityMainBinding
+    private lateinit var bindingClass: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
