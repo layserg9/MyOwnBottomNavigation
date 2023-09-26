@@ -6,23 +6,37 @@
     app:startDestination="@+id/zoo_list">
     <fragment
         android:id="@+id/zoo_list"
-        android:name="com.vlados.myownbottomnavigation.AnimalListFragment"
-        tools:layout="@layout/zoo_list" >
+        android:name="com.vlados.myownbottomnavigation.VladikTestFragment"
+        tools:layout="@layout/zoo_list">
+        <argument
+            android:name="ContentTypeKey"
+            app:argType="integer"
+            android:defaultValue="1" />
 
     </fragment>
 
     <fragment
         android:id="@+id/workers_list"
-        android:name="com.vlados.myownbottomnavigation.WorkersListFragment"
-        tools:layout="@layout/workers_list" >
+        android:name="com.vlados.myownbottomnavigation.VladikTestFragment"
+        tools:layout="@layout/workers_list"
+        >
+        <argument
+            android:name="ContentTypeKey"
+            app:argType="integer"
+            android:defaultValue="2" />
 
     </fragment>
 
     <fragment
         android:id="@+id/random_list"
-        android:name="com.vlados.myownbottomnavigation.ZooListFragment"
+        android:name="com.vlados.myownbottomnavigation.VladikTestFragment"
         tools:layout="@layout/random_list" >
-
+        <argument
+            android:name="ContentTypeKey"
+            app:argType="integer"
+            android:defaultValue="3" />
     </fragment>
+
+
 
 </navigation>

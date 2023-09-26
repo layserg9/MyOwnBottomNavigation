@@ -101,9 +101,9 @@ class AnimalFactory constructor(){
             return Bird("orange", true)
         } else return Animal(4, true)
     }
-    fun createMultipleAnimals(count: Int): List<AnimalItem> {
+    fun createMultipleAnimals(count: Int): ArrayList<AnimalItem> {
 
-        val resultList = mutableListOf<AnimalItem>()
+        val resultList = arrayListOf<AnimalItem>()
         val randomNames = listOf("Elephant", "Wolf", "Eagle", "Pigeon", "someName")
         for (i in 0..count) {
             val animal: Animal = createAnimal(randomNames.random())
