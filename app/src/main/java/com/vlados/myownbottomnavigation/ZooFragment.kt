@@ -17,12 +17,10 @@ import javax.inject.Inject
 class ZooFragment : Fragment() {
     private var zooAdapter = ZooAdapter(::deleteItem)
     private var bindingClass: RandomListBinding? = null
-//    private val viewModel: MainViewModel = MyApp.appComponent.mainViewModel()
     private var contentType: ZooListContentType = ZooListContentType.ANIMALS_CONTENT
 
     @Inject
     lateinit var viewModel: MainViewModel
-    //TODO переделать   private val viewModel:  на inject lateinit var (мб потребуется прописать fun inject)
 
     companion object {
         private const val CONTENT_TYPE_KEY = "ContentTypeKey"
@@ -30,7 +28,7 @@ class ZooFragment : Fragment() {
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        viewModel = MyApp.appComponent.mainViewModel()
+        MyApp.appComponent.inject(this)
     }
 
     override fun onCreateView(
