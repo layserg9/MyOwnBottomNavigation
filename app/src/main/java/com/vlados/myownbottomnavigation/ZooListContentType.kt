@@ -1,7 +1,7 @@
 package com.vlados.myownbottomnavigation
 
-object ZooListContentType {
-    const val ANIMALS_CONTENT = 1
-    const val WORKERS_CONTENT = 2
-    const val ALL_CONTENT = 3
+enum class ZooListContentType {
+    ANIMALS_CONTENT,
+    WORKERS_CONTENT,
+    ALL_CONTENT
 }

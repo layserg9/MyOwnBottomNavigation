@@ -1,6 +1,8 @@
 package com.vlados.myownbottomnavigation
 
+import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -8,16 +10,27 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.vlados.myownbottomnavigation.app.MyApp
 import com.vlados.myownbottomnavigation.databinding.RandomListBinding
+import javax.inject.Inject
 
 class ZooFragment : Fragment() {
     private var zooAdapter = ZooAdapter(::deleteItem)
     private var bindingClass: RandomListBinding? = null
-    private val viewModel: MainViewModel by viewModels()
-    private var contentType: Int = ZooListContentType.ANIMALS_CONTENT
+//    private val viewModel: MainViewModel = MyApp.appComponent.mainViewModel()
+    private var contentType: ZooListContentType = ZooListContentType.ANIMALS_CONTENT
+
+    @Inject
+    lateinit var viewModel: MainViewModel
+    //TODO переделать   private val viewModel:  на inject lateinit var (мб потребуется прописать fun inject)
 
     companion object {
         private const val CONTENT_TYPE_KEY = "ContentTypeKey"
+    }
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        viewModel = MyApp.appComponent.mainViewModel()
     }
 
     override fun onCreateView(
@@ -36,7 +49,7 @@ class ZooFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        contentType = arguments?.getInt(CONTENT_TYPE_KEY) ?: ZooListContentType.ANIMALS_CONTENT
+        contentType = arguments?.getSerializable("ContentTypeKey") as?ZooListContentType  ?: ZooListContentType.ANIMALS_CONTENT
         bindingClass?.recyclerViewRandom?.layoutManager = LinearLayoutManager(requireContext())
         bindingClass?.recyclerViewRandom?.adapter = zooAdapter
         bindingClass?.buttonRandom?.text = viewModel.getButtonName(contentType)
@@ -46,6 +59,7 @@ class ZooFragment : Fragment() {
             val scrollPosition = zooAdapter.itemCount.minus(1) ?: 0
             bindingClass?.recyclerViewRandom?.scrollToPosition(scrollPosition)
         }
+        Log.d("Fragment", "сейчас опрокинулся contentType - ${contentType}, viewModel hashcode - ${viewModel.hashCode()}")
     }
 
     private fun addItem() {

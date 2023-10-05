@@ -19,7 +19,7 @@ class Repository private constructor() {
         addItem(generateItem(ZooListContentType.WORKERS_CONTENT))
     }
 
-    fun getItems(contentId: Int): List<ZooItem> {
+    fun getItems(contentId: ZooListContentType): List<ZooItem> {
         return when (contentId) {
             ZooListContentType.ANIMALS_CONTENT -> zooList.filter { item -> item is AnimalItem }
             ZooListContentType.WORKERS_CONTENT -> zooList.filter { item -> item is WorkerItem }
@@ -31,7 +31,7 @@ class Repository private constructor() {
         zooList.add(item)
     }
 
-    fun getListItems(count: Int, contentType: Int): List<ZooItem> {
+    fun getListItems(count: Int, contentType: ZooListContentType): List<ZooItem> {
         return when (contentType) {
             ZooListContentType.ANIMALS_CONTENT -> AnimalFactory().createMultipleAnimals(count)
             ZooListContentType.WORKERS_CONTENT -> WorkerFactory().createMultipleWorkers(count)
@@ -39,7 +39,7 @@ class Repository private constructor() {
         }
     }
 
-    fun generateItem(contentType: Int): ZooItem {
+    fun generateItem(contentType: ZooListContentType): ZooItem {
         return getListItems(20, contentType).random()
     }
 

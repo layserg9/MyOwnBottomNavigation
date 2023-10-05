@@ -19,8 +19,12 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomnavigation.BottomNavigationItemView
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.vlados.myownbottomnavigation.app.MyApp
 import com.vlados.myownbottomnavigation.databinding.ActivityMainBinding
 import com.vlados.myownbottomnavigation.databinding.RandomListBinding
+import com.vlados.myownbottomnavigation.di.AppComponent
+import com.vlados.myownbottomnavigation.di.DaggerAppComponent
+import javax.inject.Inject
 
 class MainActivity : AppCompatActivity() {
     private lateinit var bindingClass: ActivityMainBinding
