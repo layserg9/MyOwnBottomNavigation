@@ -4,4 +4,4 @@ open class AnimalItem(
     imageId: Int,
     className: String,
     val numberOfPaws: String
-) : ZooItem (imageId, className)
+) : ZooItem(imageId, className)

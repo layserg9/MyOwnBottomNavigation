@@ -4,10 +4,11 @@ package com.vlados.myownbottomnavigation
 open class Animal(
     val numberOfPaws: Int,
     var hasHooves: Boolean,
-): IRunnable, IFeedable {
+) : IRunnable, IFeedable {
     override fun run() {
         println("${this.javaClass.simpleName} умеет бегать")
     }
+
     override fun feed() {
         println("${this.javaClass.simpleName} можно накормить")
     }
@@ -15,10 +16,12 @@ open class Animal(
 
 open class Bird(
     val beakColor: String,
-    var canFly: Boolean): Animal(2, false), IFlyable {
+    var canFly: Boolean
+) : Animal(2, false), IFlyable {
     override fun fly() {
         println("${this.javaClass.simpleName} умеет летать")
     }
+
     override fun run() {
         println("${this.javaClass.simpleName} НЕ умеет бегать")
     }
@@ -30,9 +33,9 @@ open class Worker(
     val numberOfFingers: Int,
     hasBeard: Boolean,
     clothingSize: Int
-): Man(eyeColor, heirColor, hasBeard, clothingSize), IWorkable {
+) : Man(eyeColor, heirColor, hasBeard, clothingSize), IWorkable {
     open fun doSpecificWork() {}
-    override fun work(){
+    override fun work() {
         println("${this.javaClass.simpleName} работает")
         doSpecificWork()
     }
@@ -42,16 +45,19 @@ open class Man(
     val eyeColor: String,
     val heirColor: String,
     var hasBeard: Boolean,
-    val clothingSize: Int): ITalkable, IRunnable {
+    val clothingSize: Int
+) : ITalkable, IRunnable {
     override fun talk() {
-        println("${this.javaClass.simpleName} умеет говорить")    }
+        println("${this.javaClass.simpleName} умеет говорить")
+    }
+
     override fun run() {
         println("${this.javaClass.simpleName} умеет бегать")
     }
 }
 
 //---------------------- Фабрика работников
-class WorkerFactory constructor(){
+class WorkerFactory constructor() {
 
     fun createWorker(name: String): Worker {
         if (name == "Security") {
@@ -88,19 +94,20 @@ class WorkerFactory constructor(){
 }
 
 //----------------------Фабрика животных
-class AnimalFactory constructor(){
+class AnimalFactory constructor() {
 
-    fun createAnimal(name: String): Animal{
-        if (name == "Elephant"){
+    fun createAnimal(name: String): Animal {
+        if (name == "Elephant") {
             return Elephant(4, false)
-        } else if (name == "Wolf"){
+        } else if (name == "Wolf") {
             return Wolf(4, false)
-        } else if (name == "Eagle"){
+        } else if (name == "Eagle") {
             return Eagle("grey", true)
-        } else if (name == "Pigeon"){
+        } else if (name == "Pigeon") {
             return Bird("orange", true)
         } else return Animal(4, true)
     }
+
     fun createMultipleAnimals(count: Int): ArrayList<AnimalItem> {
 
         val resultList = arrayListOf<AnimalItem>()
@@ -108,7 +115,8 @@ class AnimalFactory constructor(){
         for (i in 0..count) {
             val animal: Animal = createAnimal(randomNames.random())
             val imageId = getAnimalImage(animal.javaClass.simpleName)
-            val animalItem = AnimalItem(imageId, animal.javaClass.simpleName, animal.numberOfPaws.toString())
+            val animalItem =
+                AnimalItem(imageId, animal.javaClass.simpleName, animal.numberOfPaws.toString())
             resultList.add(animalItem)
         }
         return resultList
@@ -122,16 +130,16 @@ class AnimalFactory constructor(){
         } else if (name == "Pigeon") {
             return R.drawable.pigeon
         } else if (name == "Wolf") {
-            return R.drawable.wolf }
-        else return R.drawable.random_animal
+            return R.drawable.wolf
+        } else return R.drawable.random_animal
     }
 }
 
 /////////////////ФАБРИКА РАНДОМОВ///////////////////////////////
-class ZooFactory constructor(){
+class ZooFactory constructor() {
     private val animalFactory = AnimalFactory()
     private val workersFactory = WorkerFactory()
-    fun createMultipleItems (count: Int): List<ZooItem>{
+    fun createMultipleItems(count: Int): List<ZooItem> {
         val randomList = mutableListOf<ZooItem>()
         val animalsList = animalFactory.createMultipleAnimals(count)
         val workersList = workersFactory.createMultipleWorkers(count)
@@ -155,13 +163,12 @@ class Wolf constructor(
     hasHooves: Boolean
 ) : Animal
     (numberOfPaws, hasHooves) {
-    fun pacan(){
+    fun pacan() {
         println("${this.javaClass.simpleName} знает пацанские цитаты")
     }
 }
 
-class Eagle constructor(beakColor: String, canFly: Boolean)
-    : Bird(beakColor, canFly){
+class Eagle constructor(beakColor: String, canFly: Boolean) : Bird(beakColor, canFly) {
 }
 
 //__________ Работники
@@ -172,7 +179,8 @@ class Security constructor(
     hasBeard: Boolean,
     clothingSize: Int
 ) : Worker(eyeColor, heirColor, numberOfFingers, hasBeard, clothingSize) {
-    override fun doSpecificWork () { println("${this.javaClass.simpleName} охраняет")
+    override fun doSpecificWork() {
+        println("${this.javaClass.simpleName} охраняет")
     }
 }
 
@@ -183,7 +191,8 @@ class Caretaker constructor(
     hasBeard: Boolean,
     clothingSize: Int
 ) : Worker(eyeColor, heirColor, numberOfFingers, hasBeard, clothingSize) {
-    override fun doSpecificWork () { println("${this.javaClass.simpleName} делает заботливые штуки")
+    override fun doSpecificWork() {
+        println("${this.javaClass.simpleName} делает заботливые штуки")
     }
 }
 
@@ -214,7 +223,8 @@ interface IRunnable {
 interface IFeedable {
     fun feed()
 }
-interface  IFlyable {
+
+interface IFlyable {
     fun fly()
 }
 

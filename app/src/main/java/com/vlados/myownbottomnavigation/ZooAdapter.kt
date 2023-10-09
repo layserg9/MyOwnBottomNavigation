@@ -6,8 +6,9 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 
-class ZooAdapter(private val deleteItem: (ZooItem) -> Boolean): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
-   private var zooList = listOf<ZooItem>()
+class ZooAdapter(private val deleteItem: (ZooItem) -> Boolean) :
+    RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+    private var zooList = listOf<ZooItem>()
 
     companion object {
         private val ANIMALS_CONTENT = 1
@@ -28,11 +29,11 @@ class ZooAdapter(private val deleteItem: (ZooItem) -> Boolean): RecyclerView.Ada
             LayoutInflater.from(parent.context).inflate(R.layout.animal_item, parent, false)
         val workerView =
             LayoutInflater.from(parent.context).inflate(R.layout.worker_item, parent, false)
-        return if (viewType == ANIMALS_CONTENT) {
-            AnimalViewHolder(animalView, deleteItem)
-        } else if (viewType == WORKERS_CONTENT) {
-            WorkerViewHolder(workerView, deleteItem)
-        } else AnimalViewHolder(View(parent.context), deleteItem)
+        return when (viewType) {
+            ANIMALS_CONTENT -> AnimalViewHolder(animalView, deleteItem)
+            WORKERS_CONTENT -> WorkerViewHolder(workerView, deleteItem)
+            else -> AnimalViewHolder(View(parent.context), deleteItem)
+        }
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {

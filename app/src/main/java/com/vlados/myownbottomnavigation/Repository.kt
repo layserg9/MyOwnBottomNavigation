@@ -1,16 +1,6 @@
 package com.vlados.myownbottomnavigation
 
-class Repository private constructor() {
-    companion object {
-        private var repository: Repository? = null
-        fun getInstance(): Repository {
-            if (repository == null) {
-                repository = Repository()
-                return repository!!
-            }
-            return repository!!
-        }
-    }
+class Repository() {
 
     private var zooList = mutableListOf<ZooItem>()
 

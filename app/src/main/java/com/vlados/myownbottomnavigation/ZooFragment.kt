@@ -8,7 +8,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.vlados.myownbottomnavigation.app.MyApp
 import com.vlados.myownbottomnavigation.databinding.RandomListBinding
@@ -47,7 +46,8 @@ class ZooFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        contentType = arguments?.getSerializable("ContentTypeKey") as?ZooListContentType  ?: ZooListContentType.ANIMALS_CONTENT
+        contentType = arguments?.getSerializable("ContentTypeKey") as? ZooListContentType
+            ?: ZooListContentType.ANIMALS_CONTENT
         bindingClass?.recyclerViewRandom?.layoutManager = LinearLayoutManager(requireContext())
         bindingClass?.recyclerViewRandom?.adapter = zooAdapter
         bindingClass?.buttonRandom?.text = viewModel.getButtonName(contentType)
@@ -57,7 +57,6 @@ class ZooFragment : Fragment() {
             val scrollPosition = zooAdapter.itemCount.minus(1) ?: 0
             bindingClass?.recyclerViewRandom?.scrollToPosition(scrollPosition)
         }
-        Log.d("Fragment", "сейчас опрокинулся contentType - ${contentType}, viewModel hashcode - ${viewModel.hashCode()}")
     }
 
     private fun addItem() {
