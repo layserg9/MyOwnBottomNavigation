@@ -6,14 +6,21 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 
-class ZooAdapter(private val deleteItem: (ZooItem) -> Boolean): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
-   private var zooList = listOf<ZooItem>()
+class ZooAdapter(private val deleteItem: (ZooItem) -> Boolean) :
+    RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+    private var zooList = listOf<ZooItem>()
+
+    companion object {
+        private val ANIMALS_CONTENT = 1
+        private val WORKERS_CONTENT = 2
+        private val ALL_CONTENT = 3
+    }
 
     override fun getItemViewType(position: Int): Int {
         return when (val item = zooList[position]) {
-            is AnimalItem -> ZooListContentType.ANIMALS_CONTENT
-            is WorkerItem -> ZooListContentType.WORKERS_CONTENT
-            else -> ZooListContentType.ALL_CONTENT
+            is AnimalItem -> ANIMALS_CONTENT
+            is WorkerItem -> WORKERS_CONTENT
+            else -> ALL_CONTENT
         }
     }
 
@@ -22,21 +29,21 @@ class ZooAdapter(private val deleteItem: (ZooItem) -> Boolean): RecyclerView.Ada
             LayoutInflater.from(parent.context).inflate(R.layout.animal_item, parent, false)
         val workerView =
             LayoutInflater.from(parent.context).inflate(R.layout.worker_item, parent, false)
-        return if (viewType == ZooListContentType.ANIMALS_CONTENT) {
-            AnimalViewHolder(animalView, deleteItem)
-        } else if (viewType == ZooListContentType.WORKERS_CONTENT) {
-            WorkerViewHolder(workerView, deleteItem)
-        } else AnimalViewHolder(View(parent.context), deleteItem)
+        return when (viewType) {
+            ANIMALS_CONTENT -> AnimalViewHolder(animalView, deleteItem)
+            WORKERS_CONTENT -> WorkerViewHolder(workerView, deleteItem)
+            else -> AnimalViewHolder(View(parent.context), deleteItem)
+        }
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val viewType = getItemViewType(position)
-        if (viewType == ZooListContentType.ANIMALS_CONTENT) {
+        if (viewType == ANIMALS_CONTENT) {
             val correctViewHolder: AnimalViewHolder? =
                 holder as? AnimalViewHolder
             val elementOfList = zooList[position] as AnimalItem
             correctViewHolder?.bind(elementOfList)
-        } else if (viewType == ZooListContentType.WORKERS_CONTENT) {
+        } else if (viewType == WORKERS_CONTENT) {
             val correctViewHolder: WorkerViewHolder? =
                 holder as? WorkerViewHolder
             val elementOfList = zooList[position] as WorkerItem

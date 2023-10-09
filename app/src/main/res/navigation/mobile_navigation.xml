@@ -7,23 +7,23 @@
     <fragment
         android:id="@+id/zoo_list"
         android:name="com.vlados.myownbottomnavigation.ZooFragment"
-        tools:layout="@layout/zoo_list">
+        tools:layout="@layout/random_list">
         <argument
             android:name="ContentTypeKey"
-            app:argType="integer"
-            android:defaultValue="1" />
+            app:argType="com.vlados.myownbottomnavigation.ZooListContentType"
+            android:defaultValue="ANIMALS_CONTENT" />
 
     </fragment>
 
     <fragment
         android:id="@+id/workers_list"
         android:name="com.vlados.myownbottomnavigation.ZooFragment"
-        tools:layout="@layout/workers_list"
+        tools:layout="@layout/random_list"
         >
         <argument
             android:name="ContentTypeKey"
-            app:argType="integer"
-            android:defaultValue="2" />
+            app:argType="com.vlados.myownbottomnavigation.ZooListContentType"
+            android:defaultValue="WORKERS_CONTENT" />
 
     </fragment>
 
@@ -33,8 +33,8 @@
         tools:layout="@layout/random_list" >
         <argument
             android:name="ContentTypeKey"
-            app:argType="integer"
-            android:defaultValue="3" />
+            app:argType="com.vlados.myownbottomnavigation.ZooListContentType"
+            android:defaultValue="ALL_CONTENT" />
     </fragment>
 
 

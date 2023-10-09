@@ -1,13 +1,12 @@
 package com.vlados.myownbottomnavigation
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
+import javax.inject.Inject
 
+class MainViewModel @Inject constructor(private val repository: Repository) : ViewModel() {
 
-class MainViewModel : ViewModel() {
-
-    private val repository = Repository.getInstance()
-
-    fun getButtonName(contentType: Int): String {
+    fun getButtonName(contentType: ZooListContentType): String {
         return when (contentType) {
             ZooListContentType.ANIMALS_CONTENT -> {
                 "Добавить животное"
@@ -24,17 +23,17 @@ class MainViewModel : ViewModel() {
         }
     }
 
-    fun getItems(contentType: Int): List<ZooItem> {
+    fun getItems(contentType: ZooListContentType): List<ZooItem> {
         return repository.getItems(contentType)
     }
 
-    fun addItem(contentType: Int): List<ZooItem> {
+    fun addItem(contentType: ZooListContentType): List<ZooItem> {
         val newItem = repository.generateItem(contentType)
         repository.addItem(newItem)
         return repository.getItems(contentType)
     }
 
-    fun deleteItem(item: ZooItem, contentType: Int): List<ZooItem> {
+    fun deleteItem(item: ZooItem, contentType: ZooListContentType): List<ZooItem> {
         repository.deleteItem(item)
         return repository.getItems(contentType)
     }
